@@ -1,0 +1,12 @@
+.DS_Store
+npm-debug.log*
+log
+node_modules
+/package-lock.json
+/yarn-lock.json
+*.tar
+*.md
+
+# Editor directories and files
+.vscode
+.history
