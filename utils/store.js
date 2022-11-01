@@ -15,6 +15,7 @@ export default redisStore({ client });
  * @param {string} key 键
  * @param {*} val 值
  * @param {number=} timeout 有效时间（单位秒）
+ * @returns {Promise<void>}
  */
 export async function redisSet(key, val, timeout = 60 * 60) {
   if (typeof val == 'object') {
@@ -41,6 +42,12 @@ export async function redisGet(key) {
   }
 };
 
+/**
+ * 删除redis某个键
+ * 
+ * @param {string} key 需要删除的键
+ * @returns {Promise<void>}
+ */
 export async function redisDel(key) {
   const val = await client.del(key);
 }
