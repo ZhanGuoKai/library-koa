@@ -24,6 +24,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "mysql2": "^2.3.3",
+    "nodemailer": "^6.8.0",
     "pug": "^2.0.3",
     "redis": "^4.3.1",
     "sequelize": "^6.24.0",

@@ -11,7 +11,10 @@ const sequelize = new Sequelize(
     dialect: DATABASE.type,
     pool: DATABASE.pool,
     define: {
-      freezeTableName: true
+      freezeTableName: true,
+      underscored: true,
+      createdAt: false,
+      updatedAt: false
     }
   }
 );
@@ -37,3 +40,5 @@ export const TEXT = DataTypes.TEXT;
 export const INTEGER = DataTypes.INTEGER;
 /** 布尔值 */
 export const BOOLEAN = DataTypes.BOOLEAN;
+/** 日期 */
+export const DATE = DataTypes.DATE;

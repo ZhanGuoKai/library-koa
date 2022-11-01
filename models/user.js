@@ -6,16 +6,23 @@ const User = seq.define('user', {
     allowNull: false,
     unique: true,
     primaryKey: true,
-    comment: '用户编码',
-    autoIncrement: true
+    autoIncrement: true,
+    comment: '用户编号'
+  },
+  email: {
+    type: STRING,
+    unique: true,
+    allowNull: false,
+    comment: '邮箱'
   },
   username: {
-    type: STRING,
+    type: STRING(25),
+    unique: true,
     allowNull: false,
     comment: '用户名'
   },
   password: {
-    type: STRING,
+    type: STRING(25),
     allowNull: false,
     comment: '密码'
   },

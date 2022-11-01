@@ -8,7 +8,7 @@ export default class ResModel {
    * @param {Object=} data 返回数据
    * @param {boolean} success 是否成功
    */
-  constructor(msg = '', code = 200, data = {}, success = false) {
+  constructor(msg = '', code = 101, data = {}, success = false) {
     this.msg = msg;
     this.code = code;
     this.data = data;
@@ -23,7 +23,7 @@ export default class ResModel {
    * @returns
    */
   static success(msg = '', data = {}) {
-    return new ResModel(msg, 1000, data, true);
+    return new ResModel(msg, 101, data, true);
   }
 
   /**
@@ -33,7 +33,7 @@ export default class ResModel {
    * @param {number=} code 响应状态码
    * @returns
    */
-  static error(msg = '', code = 1001) {
+  static error(msg = '', code = 201) {
     return new ResModel(msg, code);
   }
 }

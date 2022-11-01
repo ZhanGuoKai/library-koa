@@ -6,7 +6,9 @@ const router = new Router();
 router.prefix('/auth');
 
 router.get('/code', AuthController.getCode);
-router.post('/login', AuthController.login);
+router.post('/send-code', AuthController.sendCode);
+router.post('/password-login', AuthController.loginByPassword);
+router.post('/email-login', AuthController.loginByEmail);
 router.post('/register', AuthController.register);
 
 export default router;

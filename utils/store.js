@@ -14,9 +14,9 @@ export default redisStore({ client });
  *
  * @param {string} key 键
  * @param {*} val 值
- * @param {number=} timeout 有效时间
+ * @param {number=} timeout 有效时间（单位秒）
  */
-export async function setRedis(key, val, timeout = 60 * 60) {
+export async function redisSet(key, val, timeout = 60 * 60) {
   if (typeof val == 'object') {
     val = JSON.stringify(val);
   }
@@ -30,7 +30,7 @@ export async function setRedis(key, val, timeout = 60 * 60) {
  * @param {string} key 键
  * @returns {Promise<*>}
  */
-export async function getRedis(key) {
+export async function redisGet(key) {
   const val = await client.get(key);
   if (val == null) return null;
   try {
@@ -40,3 +40,7 @@ export async function getRedis(key) {
     return val;
   }
 };
+
+export async function redisDel(key) {
+  const val = await client.del(key);
+}

@@ -11,6 +11,6 @@ export async function getInfo(id) {
   if (!id) return ResModel.error('id不能为空');
 
   const user = await User.findByPk(id);
-  if (user == null) return ResModel.error('id不存在', 1011);
+  if (user == null) return ResModel.error('id不存在', 201);
   return ResModel.success('获取成功', { username: user.username });
 }

@@ -43,7 +43,7 @@ app.use(async (ctx, next) => {
 });
 
 // jwt鉴权
-app.use(jwt({ secret: SECRET, debug: true }).unless({ path: [/^\/auth/] }));
+app.use(jwt({ secret: SECRET, debug: true }).unless({ path: [/^\/auth/, '/redis'] }));
 
 // 判断是否存在异地登录
 app.use(auth);
