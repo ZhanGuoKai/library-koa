@@ -1,9 +1,9 @@
-import User from '../models/user';
 import ResModel from '../models/res';
 import { getToken } from '../utils/auth';
 import { redisDel, redisGet, redisSet } from '../utils/store';
 import { sendEmail, getCodeHTML } from '../utils/mailer';
 import { TOKEN_EXPIRES_TIME } from '../config';
+import { User } from '../models';
 
 /** @constant {RegExp} 验证邮箱正则表达式 */
 const emailReg =
@@ -77,15 +77,20 @@ class AuthService {
     if (!/^(?=.*\d)(?=.*[a-zA-Z])[\da-zA-Z]*$/.test(password))
       return ResModel.error('密码必须且只能包含数字和字母', 306);
 
-    if (code.toLowerCase() !== captcha)
+      if (code.toLowerCase() !== captcha)
       return ResModel.error('验证码错误', 401);
 
     const user = await User.findOne({ where: { username, password } });
     if (user === null) return ResModel.error('账号或密码错误', 402);
 
-    const token = getToken({ id: user.id });
+    const token = getToken({ id: user.id, role: user.role });
     await redisSet(`jwt_${user.id}`, token, TOKEN_EXPIRES_TIME);
-    return ResModel.success('登录成功', { token, role: user.role });
+    return ResModel.success('登录成功', {
+      token,
+      username: user.username,
+      email: user.email,
+      role: user.role
+    });
   }
 
   /**
@@ -113,7 +118,12 @@ class AuthService {
     const token = getToken({ id: user.id });
     await redisSet(`jwt_${user.id}`, token, TOKEN_EXPIRES_TIME);
     redisDel(`email_code_${email}`);
-    return ResModel.success('登录成功', { token, role: user.role });
+    return ResModel.success('登录成功', {
+      token,
+      username: user.username,
+      email: user.email,
+      role: user.role
+    });
   }
 
   /**
@@ -156,7 +166,12 @@ class AuthService {
     const user = await User.create({ username, password, email });
     const token = getToken({ id: user.id });
     await redisSet(`jwt_${user.id}`, token, TOKEN_EXPIRES_TIME);
-    return ResModel.success('注册成功', { token, role: user.role });
+    return ResModel.success('注册成功', {
+      token,
+      username,
+      email,
+      role: user.role
+    });
   }
 }
 

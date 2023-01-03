@@ -3,8 +3,8 @@ import { createClient } from 'redis';
 import { REDIS } from '../config';
 
 export const client = createClient(REDIS);
-client.on('ready', () => console.log('Redis is ready.'));
-client.on('error', err => console.error('Redis client error', err));
+client.on('ready', () => console.log('Redis已就绪。'));
+client.on('error', err => console.error('Redis错误：', err));
 (async () => await client.connect())();
 
 export default redisStore({ client });
@@ -46,8 +46,8 @@ export async function redisGet(key) {
  * 删除redis某个键
  * 
  * @param {string} key 需要删除的键
- * @returns {Promise<void>}
+ * @returns {Promise<number>}
  */
-export async function redisDel(key) {
-  const val = await client.del(key);
+export function redisDel(key) {
+  return client.del(key);
 }

@@ -1,11 +1,16 @@
 import Router from 'koa-router';
+import redis, { redisGet } from '../utils/store';
 
-import users from './users';
 import auth from './auth';
+import book from './book';
+import user from './user';
+import admin from './admin';
 
 const router = new Router();
 
-router.use(users.routes(), users.allowedMethods());
 router.use(auth.routes(), auth.allowedMethods());
+router.use(book.routes(), book.allowedMethods());
+router.use(user.routes(), user.allowedMethods());
+router.use(admin.routes(), admin.allowedMethods());
 
 export default router;

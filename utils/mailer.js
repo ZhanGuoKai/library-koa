@@ -27,7 +27,7 @@ export async function sendEmail(to, subject, text, html) {
  * @returns {string}
  */
 export function getCodeHTML(code) {
-  return `
+  return `\
 <div style="background-color: #ececec; padding: 35px">
   <table
     cellpadding="0"
@@ -131,6 +131,6 @@ export function getCodeHTML(code) {
       </tr>
     </tbody>
   </table>
-</div>
+</div>\
 `;
 }

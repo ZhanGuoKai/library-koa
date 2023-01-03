@@ -15,7 +15,6 @@ class AuthController {
 
   /** @type {Middleware} 发送验证码 */
   static async sendCode(ctx, next) {
-    console.log(ctx.request.ip);
     ctx.body = await AuthService.sendCode(ctx.request.body, ctx.request.ip);
   }
 

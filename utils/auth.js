@@ -4,7 +4,7 @@ import { SECRET, TOKEN_EXPIRES_TIME } from '../config';
 /**
  * 获取一个令牌
  *
- * @param {{}} payload 负载
+ * @param {Object} payload 负载
  * @returns {string} 令牌
  */
 export function getToken(payload = {}) {

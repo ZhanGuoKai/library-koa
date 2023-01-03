@@ -15,16 +15,17 @@ const sequelize = new Sequelize(
       underscored: true,
       createdAt: false,
       updatedAt: false
-    }
+    },
+    timezone: '+08:00'
   }
 );
 
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    console.log('成功连接到数据库。');
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error('无法连接到数据库：', error);
   }
 })();
 
@@ -42,3 +43,5 @@ export const INTEGER = DataTypes.INTEGER;
 export const BOOLEAN = DataTypes.BOOLEAN;
 /** 日期 */
 export const DATE = DataTypes.DATE;
+/** 当前时间 */
+export const NOW = DataTypes.NOW;
